@@ -16,20 +16,15 @@ class Trie<T>{
 
     private words: string[];
     private word: string[];
+    private data:string[];
 
 
 
-    constructor(words?: string[],word?: string[]) {
-
+    constructor(words?: string[],word?: string[],data?:string[]) {
+        this.data = data || [];
         this.words = words || [];
         this.word = word || [];
     }
-
-    // private firstcharacter: string;
-    // private static node(symbol){
-    //     this.symbol = symbol;
-    //
-    // };
 
 
     private main_node: any;
@@ -69,7 +64,6 @@ class Trie<T>{
                                     temp = temp.child;
                                     checking2 = false;
                                 }
-
                         }
                     }
                     else{
@@ -186,38 +180,53 @@ class Trie<T>{
                             }
 
                         }
-
-
-
-
-
-
-
-
             }
 
+        }
 
+    }
 
+    public search(value:string){
+        this.data = value.split("");
+        let found = 0;
+        let couldntfind = false;
+        let being_searched = this.main_node.child;
+        for(let k = 0;k < this.data.length; k++){
+            let searching = true;
+            while (searching && !couldntfind){
+                if(this.data[k] == being_searched.symbol){
+                    found++;
+                    being_searched = being_searched.child;
+                    searching = false;
+                }
+                else{
+                    being_searched = being_searched.next;
+                    if (being_searched == null){
+                        searching = false;
+                        couldntfind = true;
+                    }
+                }
+            }
 
         }
-        return console.log(this.main_node.child)
-
-
+        if (found == this.data.length){
+            return console.log("Found!")
+        }
+        else if (couldntfind == true){
+            return console.log("Nope")
+        }
 
     }
 
 
 }
 
-let text = "Microsoft researchers MSS were working late into the hours the Friday before this holiday weekend looking to address yesterday’s Shadow Brokers dump of Windows exploits. In a message sent to TechCrunch overnight, the company said it has addressed the issue for systems running Windows 7 and later. “We’ve investigated and confirmed that the exploits disclosed by the Shadow Brokers have already been addressed by previous updates to our supported products,” the company wrote. “Customers with up-to-date software are already protected.” Microsoft also issued a blog post on the subject, noting that, as the company worked to verify the exploits, it discovered that nine were already been addressed by previously issued patches. Microsoft Security Response Center, naturally, recommends that users keep their machines up to date to ensure that they’re protected. There are three additional exploits not addressed by the aforementioned patches, though MS notes that they’re not capable of reproducing on machines running Windows 7 and above or recent versions of Exchange. Of course, that leave potential vulnerability for users still clinging to older versions of the operating system, as they’re no longer supported. Once again, Microsoft’s response would no doubt be: upgrade to ensure you’re protected. The dump was the second from Shadow Brokers this week, but the first that contained major exploits in several months. The exploits were believe to have originated from the National Security Agency as part of its work to monitor money flow in the SWIFT interbank messaging system. The NSA has been roundly criticized for not warning companies sooner that the tools had leaked, though it has yet to address any potential connection to the leak. And indeed, in a separate statement Microsoft confirmed the Agency hadn’t revealed potential vulnerabilities prior to yesterday’s mad dash to address the leaked exploits. “At this time,” said the spokesperson, “other than reporters, no individual or organization has contacted us in relation to the materials released by Shadow Brokers.”";
+let text = "Microsoft researchers were working late into the hours the Friday before this holiday weekend looking to address yesterday’s Shadow Brokers dump of Windows exploits. In a message sent to TechCrunch overnight, the company said it has addressed the issue for systems running Windows 7 and later. “We’ve investigated and confirmed that the exploits disclosed by the Shadow Brokers have already been addressed by previous updates to our supported products,” the company wrote. “Customers with up-to-date software are already protected.” Microsoft also issued a blog post on the subject, noting that, as the company worked to verify the exploits, it discovered that nine were already been addressed by previously issued patches. Microsoft Security Response Center, naturally, recommends that users keep their machines up to date to ensure that they’re protected. There are three additional exploits not addressed by the aforementioned patches, though MS notes that they’re not capable of reproducing on machines running Windows 7 and above or recent versions of Exchange. Of course, that leave potential vulnerability for users still clinging to older versions of the operating system, as they’re no longer supported. Once again, Microsoft’s response would no doubt be: upgrade to ensure you’re protected. The dump was the second from Shadow Brokers this week, but the first that contained major exploits in several months. The exploits were believe to have originated from the National Security Agency as part of its work to monitor money flow in the SWIFT interbank messaging system. The NSA has been roundly criticized for not warning companies sooner that the tools had leaked, though it has yet to address any potential connection to the leak. And indeed, in a separate statement Microsoft confirmed the Agency hadn’t revealed potential vulnerabilities prior to yesterday’s mad dash to address the leaked exploits. “At this time,” said the spokesperson, “other than reporters, no individual or organization has contacted us in relation to the materials released by Shadow Brokers.”";
 let newer = new Trie();
 // newer.add(text);
 // newer.add(text2);
 
 
 newer.add(text);
-// let a = new node();
-// a.symbol = "Kupa";
-// console.log(a.symbol);
-//
-// let b = new node();
+newer.search("Shadow");
+
