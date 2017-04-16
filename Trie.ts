@@ -97,6 +97,7 @@ class Trie<T>{
                                             temp2 = node2;
                                             temp.child = temp2;
                                             temp = temp.child;
+
                                             checking2 = false;
                                         }
                                         else if (temp2.symbol==this.word[j]){
@@ -104,26 +105,23 @@ class Trie<T>{
                                             checking2 = false;
                                         }
                                         else{
-                                            temp2 = temp.child.next;
                                             let checking3 = true;
+                                             temp = temp.child;
                                             while(checking3){
-                                                if(temp2==this.word[j]){
-                                                    temp.child.next = temp2;
-                                                    temp = temp.child.next;
+                                                if(temp.next==this.word[j]){
                                                     checking3=false;
                                                 }
-                                                else if(temp2 == null){
+                                                else if(temp.next == null){
                                                     let node3 = new node();
                                                     node3.symbol = this.word[j];
                                                     node3.child = null;
                                                     node3.next = null;
-                                                    temp2 = node3;
-                                                    temp.child.next = temp2;
-                                                    temp = temp.child.next;
+                                                    temp.next = node3;
+                                                    temp = temp.next;
                                                     checking3 = false;
                                                 }
                                                 else{
-                                                    temp2 = temp2.next;
+                                                    temp = temp.next;
                                                 }
 
                                             }
@@ -171,7 +169,7 @@ class Trie<T>{
 
 }
 
-let text = "Microsoft Mresearchers were working late into the hours the Friday before this holiday weekend looking to address yesterday’s Shadow Brokers dump of Windows exploits. In a message sent to TechCrunch overnight, the company said it has addressed the issue for systems running Windows 7 and later. “We’ve investigated and confirmed that the exploits disclosed by the Shadow Brokers have already been addressed by previous updates to our supported products,” the company wrote. “Customers with up-to-date software are already protected.” Microsoft also issued a blog post on the subject, noting that, as the company worked to verify the exploits, it discovered that nine were already been addressed by previously issued patches. Microsoft Security Response Center, naturally, recommends that users keep their machines up to date to ensure that they’re protected. There are three additional exploits not addressed by the aforementioned patches, though MS notes that they’re not capable of reproducing on machines running Windows 7 and above or recent versions of Exchange. Of course, that leave potential vulnerability for users still clinging to older versions of the operating system, as they’re no longer supported. Once again, Microsoft’s response would no doubt be: upgrade to ensure you’re protected. The dump was the second from Shadow Brokers this week, but the first that contained major exploits in several months. The exploits were believe to have originated from the National Security Agency as part of its work to monitor money flow in the SWIFT interbank messaging system. The NSA has been roundly criticized for not warning companies sooner that the tools had leaked, though it has yet to address any potential connection to the leak. And indeed, in a separate statement Microsoft confirmed the Agency hadn’t revealed potential vulnerabilities prior to yesterday’s mad dash to address the leaked exploits. “At this time,” said the spokesperson, “other than reporters, no individual or organization has contacted us in relation to the materials released by Shadow Brokers.”"
+let text = "Microsoft Mresearchers MSS were working late into the hours the Friday before this holiday weekend looking to address yesterday’s Shadow Brokers dump of Windows exploits. In a message sent to TechCrunch overnight, the company said it has addressed the issue for systems running Windows 7 and later. “We’ve investigated and confirmed that the exploits disclosed by the Shadow Brokers have already been addressed by previous updates to our supported products,” the company wrote. “Customers with up-to-date software are already protected.” Microsoft also issued a blog post on the subject, noting that, as the company worked to verify the exploits, it discovered that nine were already been addressed by previously issued patches. Microsoft Security Response Center, naturally, recommends that users keep their machines up to date to ensure that they’re protected. There are three additional exploits not addressed by the aforementioned patches, though MS notes that they’re not capable of reproducing on machines running Windows 7 and above or recent versions of Exchange. Of course, that leave potential vulnerability for users still clinging to older versions of the operating system, as they’re no longer supported. Once again, Microsoft’s response would no doubt be: upgrade to ensure you’re protected. The dump was the second from Shadow Brokers this week, but the first that contained major exploits in several months. The exploits were believe to have originated from the National Security Agency as part of its work to monitor money flow in the SWIFT interbank messaging system. The NSA has been roundly criticized for not warning companies sooner that the tools had leaked, though it has yet to address any potential connection to the leak. And indeed, in a separate statement Microsoft confirmed the Agency hadn’t revealed potential vulnerabilities prior to yesterday’s mad dash to address the leaked exploits. “At this time,” said the spokesperson, “other than reporters, no individual or organization has contacted us in relation to the materials released by Shadow Brokers.”"
 
 let newer = new Trie();
 newer.add(text);
